@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Core Committee | EventEdge</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/core_details.css') }}">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='/favicon.ico') }}">
+
+</head>
+   <body class="step-2">
+
+  <!-- Background Video -->
+  <video autoplay muted loop id="myVideo">
+    <source src="{{ url_for('static', filename='bg.mp4') }}" type="video/mp4">
+  </video>
+  <div class="overlay"></div>
+  <!-- Progress Bar -->
+
+<div class="progress-container">
+  <div class="progress-line"></div>
+
+  <div class="progress-step completed">
+    <span>1</span>
+    <p>Create Event</p>
+  </div>
+
+  <div class="progress-step active">
+    <span>2</span>
+    <p>Core Committee</p>
+  </div>
+
+  <div class="progress-step">
+    <span>3</span>
+    <p>Meetings</p>
+  </div>
+
+  <div class="progress-step">
+    <span>4</span>
+    <p>Review</p>
+  </div>
+
+  <div class="progress-step">
+    <span>5</span>
+    <p>Send Emails</p>
+  </div>
+</div>
+
+
+  <!-- Logout Button -->
+  <div class="logout-btn-container">
+    <a href="{{ url_for('welcome') }}" class="logout-btn">Logout</a>
+  </div>
+
+  <div class="container">
+    <h1>Core Committee Details</h1>
+
+    <!-- Members List -->
+    <div id="membersList"></div>
+
+    <!-- Form Container (hidden initially) -->
+    <div id="formContainer" class="hidden">
+      <input type="text" id="name" placeholder="Member Name" required>
+      <select id="role" required>
+        <option value="">Select Role</option>
+        <option value="Event Head">Event Head</option>
+        <option value="Anchor">Anchor</option>
+        <option value="Photography">Photography</option>
+        <option value="Coordinator">Coordinator</option>
+        <option value="Design">Design</option>
+        <option value="Logistics">Logistics</option>
+      </select>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="text" id="phone" placeholder="Phone Number" required>
+      <button type="button" id="saveMemberBtn">Save Member</button>
+    </div>
+
+    <!-- Add Member Button -->
+    <button id="addMemberBtn" class="floating-btn">＋ Add Member</button>
+
+    <!-- Form to Submit All Members -->
+    <form method="POST" action="{{ url_for('core_details') }}" id="membersForm">
+      <input type="hidden" name="members_json" id="members_json">
+      <button type="submit" id="nextBtn" class="hidden next-btn">Next ➜</button>
+    </form>
+  </div>
+
+  <script>
+    const addMemberBtn = document.getElementById('addMemberBtn');
+    const formContainer = document.getElementById('formContainer');
+    const saveMemberBtn = document.getElementById('saveMemberBtn');
+    const membersList = document.getElementById('membersList');
+    const nextBtn = document.getElementById('nextBtn');
+    const membersForm = document.getElementById('membersForm');
+
+    let members = [];
+
+    // Show form when clicking "Add Member"
+    addMemberBtn.addEventListener('click', () => {
+      addMemberBtn.classList.add('hidden');
+      formContainer.classList.remove('hidden');
+    });
+
+    // Save member
+    saveMemberBtn.addEventListener('click', () => {
+      const name = document.getElementById('name').value.trim();
+      const role = document.getElementById('role').value;
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+
+      if (!name || !role || !email || !phone) {
+        alert('Please fill all fields!');
+        return;
+      }
+
+      members.push({ name, role, email, phone });
+
+      // Display members
+      membersList.innerHTML = members.map((m, i) => `
+        <div class="member-card">
+          <strong>${i + 1}. ${m.name}</strong> — ${m.role}<br>
+          <small>${m.email} | ${m.phone}</small>
+        </div>
+      `).join('');
+
+      // Reset form
+      document.getElementById('name').value = '';
+      document.getElementById('role').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('phone').value = '';
+
+      // Hide form, show Add button
+      formContainer.classList.add('hidden');
+      addMemberBtn.classList.remove('hidden');
+
+      // Show Next button
+      nextBtn.classList.remove('hidden');
+    });
+
+    // Prepare members JSON before submitting
+    membersForm.addEventListener('submit', (e) => {
+      if (members.length === 0) {
+        e.preventDefault();
+        alert('Please add at least one member!');
+        return;
+      }
+      document.getElementById('members_json').value = JSON.stringify(members);
+    });
+  </script>
+</body>
+</html>

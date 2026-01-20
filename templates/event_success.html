@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event Created | EventEdge</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/event_success.css') }}">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='/favicon.ico') }}">
+
+</head>
+<body>
+
+  <!-- Background Video -->
+  <video autoplay muted loop id="myVideo">
+    <source src="{{ url_for('static', filename='bg.mp4') }}" type="video/mp4">
+  </video>
+  <div class="overlay"></div>
+<!-- Confetti Container -->
+<div class="confetti-container"></div>
+
+<script>
+  const confettiContainer = document.querySelector('.confetti-container');
+
+  const colors = [
+    '#ff6b6b',
+    '#feca57',
+    '#48dbfb',
+    '#1dd1a1',
+    '#5f27cd',
+    '#f368e0'
+  ];
+
+  for (let i = 0; i < 50; i++) {
+    const confetti = document.createElement('span');
+    confetti.classList.add('confetti');
+
+    // random styles
+    confetti.style.left = Math.random() * 100 + 'vw';
+    confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+    confetti.style.backgroundColor =
+      colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+    confettiContainer.appendChild(confetti);
+  }
+</script>
+
+<!-- Progress Bar -->
+<div class="progress-container">
+  <div class="progress-line"></div>
+
+  <div class="progress-step completed">
+    <span>1</span>
+    <p>Create Event</p>
+  </div>
+
+  <div class="progress-step completed">
+    <span>2</span>
+    <p>Core Committee</p>
+  </div>
+
+  <div class="progress-step completed">
+    <span>3</span>
+    <p>Meetings</p>
+  </div>
+
+  <div class="progress-step completed">
+    <span>4</span>
+    <p>Review</p>
+  </div>
+
+  <div class="progress-step active">
+    <span>5</span>
+    <p>Send Emails</p>
+  </div>
+</div>
+
+
+  <!-- Success Content -->
+  <div class="success-container">
+    <h1>🎉 Event Created Successfully!</h1>
+    <p>All committee members have been notified via email.</p>
+
+    <div class="button-group">
+      <a href="{{ url_for('create_event') }}" class="btn primary">Create Another Event</a>
+      <a href="{{ url_for('logout') }}" class="btn secondary">Logout</a>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard | EventEdge</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_dashboard.css') }}">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='/favicon.ico') }}">
+
+</head>
+<body>
+
+  <video autoplay muted loop id="myVideo">
+    <source src="{{ url_for('static', filename='bg.mp4') }}" type="video/mp4">
+  </video>
+  <div class="overlay"></div>
+
+  <div class="dashboard-container">
+    <h1 class="dashboard-title">
+      EventEdge <span>Admin</span> Dashboard
+    </h1>
+
+    <div class="dashboard-grid">
+      <button class="dashboard-btn create" onclick="location.href='/create-event'">
+        Create Event
+      </button>
+
+      <button class="dashboard-btn view" onclick="location.href='/admin/view-events'">
+        View Events
+      </button>
+
+      <button class="dashboard-btn logs" onclick="location.href='/admin/activity-logs'">
+        Activity Logs
+      </button>
+
+      <button class="dashboard-btn logout" onclick="location.href='/logout'">
+        Logout
+      </button>
+    </div>
+  </div>
+
+</body>
+</html>
