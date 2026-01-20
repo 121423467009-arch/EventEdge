@@ -1,0 +1,125 @@
+/* ---------- GENERAL ---------- */
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  overflow: hidden;
+  background: black;
+}
+
+body, p, input, textarea, label {
+  font-family: 'Inter', sans-serif;
+}
+
+button, .btn {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+}
+
+/* ---------- VIDEO BACKGROUND ---------- */
+#myVideo {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  filter: brightness(0.5);
+  z-index: -2;
+}
+
+/* ---------- OVERLAY ---------- */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.1);
+  z-index: -1;
+}
+
+/* ---------- SPLASH CONTENT ---------- */
+.splash-container {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+
+  /* Animation */
+  opacity: 0;
+  animation: fadeInMoveUp 2.5s ease forwards;
+  animation-delay: 0.5s;
+}
+
+/* ---------- FADE + MOVE UP ---------- */
+@keyframes fadeInMoveUp {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -40%);
+  }
+  60% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -100%);
+  }
+}
+
+/* ---------- BUTTON GROUP ---------- */
+.button-group {
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  opacity: 0;          /* Initially hidden */
+  pointer-events: none; /* Can't click */
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+
+/* ---------- BUTTON APPEAR ---------- */
+@keyframes showButtons {
+  from {
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, 20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+    pointer-events: auto;
+  }
+}
+
+/* ---------- BUTTON STYLE ---------- */
+button {
+  border: 2px solid #a076ee;
+  background-color: #8759fb;
+  border-radius: 0.9em;
+  cursor: pointer;
+  padding: 0.8em 1.6em;
+  color: #fff;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #8e7eb3;
+}
+
+h1 {
+  color: white;
+  font-size: 80px;
+}
+
+.admin-text {
+  color: #FFD700; /* yellow */
+}
