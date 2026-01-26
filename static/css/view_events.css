@@ -14,6 +14,131 @@ button, .btn {
   font-weight: 600;
 }
 
+/* ===== ADMIN TOOLBAR ===== */
+.admin-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 25px auto 40px;
+    padding: 18px 22px;
+    width: fit-content;
+
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* ===== COMMON INPUT STYLE ===== */
+.admin-toolbar input,
+.admin-toolbar select {
+    padding: 11px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    outline: none;
+    min-width: 180px;
+}
+
+/* MONTH INPUT SMALLER */
+.admin-toolbar input[type="month"] {
+    min-width: 150px;
+    color: #fff;
+}
+
+/* SELECT DROPDOWN FIX */
+.admin-toolbar select {
+    cursor: pointer;
+}
+
+.placeholder-option {
+    color: white !important;
+}
+
+.sort-option {
+    color: black !important;
+}
+
+/* PLACEHOLDER */
+.admin-toolbar input::placeholder {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+/* Month filter input */
+.filter-month {
+  background: transparent;
+  color: #ffffff;
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Calendar icon color (Chrome, Edge, Brave) */
+.filter-month::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
+/* Remove ugly inner background */
+.filter-month::-webkit-inner-spin-button,
+.filter-month::-webkit-clear-button {
+  display: none;
+}
+
+/* Placeholder text */
+.filter-month::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Hover effect */
+.filter-month:hover {
+  border-color: #ffffff;
+}
+
+
+/* APPLY BUTTON */
+.toolbar-btn {
+    padding: 11px 18px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+
+    background: linear-gradient(135deg, #4da3ff, #6f5cff);
+    color: #fff;
+    transition: all 0.25s ease;
+}
+
+.toolbar-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(77, 163, 255, 0.4);
+}
+
+
+.download-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(255,255,255,0.15);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  text-decoration: none;
+  color: white;
+}
+
+
 #myVideo {
   position: fixed;
   top: 50%;

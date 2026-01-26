@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>View Events | EventEdge Admin</title>
+
   <link rel="stylesheet" href="{{ url_for('static', filename='css/view_events.css') }}">
   <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='/favicon.ico') }}">
-
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
 
 <body>
@@ -20,29 +20,80 @@
   <div class="overlay"></div>
 
   <!-- Logout Button -->
-   <div class="logout-btn-container">
-   <a href="{{ url_for('welcome') }}" class="logout-btn">Logout</a>
-   </div>
+  <div class="logout-btn-container">
+    <a href="{{ url_for('welcome') }}" class="logout-btn">Logout</a>
+  </div>
 
   <!-- Page Content -->
   <div class="events-container">
-  <h1>📅 Created Events</h1>
+    <h1>📅 Created Events</h1>
 
-  {% if events %}
-    {% for event in events %}
-      <div class="event-card">
-        <h3>{{ event.name }}</h3>
-        <p><strong>Head:</strong> {{ event.head_name }}</p>
-        <p><strong>Created by:</strong> {{ event.created_by }}</p>
-        <span class="event-time">
-          {{ event.created_at.strftime('%d %b %Y • %I:%M %p') }}
-        </span>
-      </div>
-    {% endfor %}
-  {% else %}
-    <p class="empty-text">No events created yet.</p>
-  {% endif %}
-</div>
+  <form method="GET" action="{{ url_for('view_events') }}">
+    <div class="admin-toolbar">
+
+        <!-- SEARCH -->
+        <div class="toolbar-item">
+            <input
+                type="text"
+                name="search"
+                placeholder="Search events..."
+                value="{{ search }}"
+            >
+        </div>
+
+        <!-- SORT DROPDOWN -->
+        <div class="toolbar-item-sort">
+            <select name="sort" class="custom-sort">
+            <option value="" class="placeholder-option">Sort</option>
+            <option value="az" class="sort-option">A–Z</option>
+            <option value="za" class="sort-option">Z–A</option>
+            </select>
+        </div>
+
+        <!-- MONTH FILTER -->
+        <div class="toolbar-item">
+            <input
+                type="month"
+                name="month"
+                class="filter-month"
+                value="{{ month }}"
+            >
+        </div>
+
+        <!-- SUBMIT -->
+        <button type="submit" class="toolbar-btn">
+            Search
+        </button>
+
+    </div>
+</form>
+
+
+
+    {% if events %}
+      {% for event in events %}
+        <div class="event-card">
+
+          <h3>{{ event.name }}</h3>
+
+          <a href="{{ url_for('download_event', event_id=event.id) }}"
+             class="download-btn">
+            ⬇ Download Details
+          </a>
+
+          <p><strong>Head:</strong> {{ event.head_name }}</p>
+          <p><strong>Created by:</strong> {{ event.created_by }}</p>
+
+          <span class="event-time">
+            {{ event.created_at.strftime('%d %b %Y • %I:%M %p') }}
+          </span>
+
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="empty-text">No events created yet.</p>
+    {% endif %}
+  </div>
 
 </body>
 </html>
